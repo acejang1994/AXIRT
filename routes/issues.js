@@ -43,7 +43,10 @@ issues.post("/comment", function(req, res){
 		}
 		res.json(data);
 	});
+});
 
+issues.post("/upvote", function(req, res){
+	
 });
 
 module.exports = issues;
