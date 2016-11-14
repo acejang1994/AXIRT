@@ -35,9 +35,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // this sets up all of the routes
 var routes = require('./routes/routes.js');
-var questionRoutes = require('./routes/questions.js');
+var issues = require('./routes/issues.js');
 
 app.use("/", routes);
+app.use("/issues", issues);
+
 
 app.get("/*", function(req, res) {
   var url = path.resolve(__dirname + '/public/index.html');
