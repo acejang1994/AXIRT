@@ -45,8 +45,27 @@ issues.post("/comment", function(req, res){
 	});
 });
 
+// router.put('/posts/:post/upvote', function(req, res, next) {
+//   req.post.upvote(function(err, post){
+//     if (err) { return next(err); }
+
+//     res.json(post);
+//   });
+// });
+
 issues.post("/upvote", function(req, res){
-	
+	Issue.findOneAndUpdate({"_id": _id}, { "$inc": { "upvote": 1 }})
+	.exec(function(err, db_res) { 
+    if (err) { 
+      throw err; 
+    } 
+    else { 
+      console.log(db_res); 
+    } 
+	  });
+
+    res.json(post);
 });
+
 
 module.exports = issues;
