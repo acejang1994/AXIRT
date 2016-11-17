@@ -1,1 +1,10 @@
+<br>
+<br>
 <h1>AXIRT</h1>
+<div ng-repeat="issue in issues">
+	{{issue.content}} - {{issue.authorId}}
+	<div ng-repeat="comment in issue.comment" style="padding-left:5em">
+		{{comment.content}}
+	</div>
+</div>
+

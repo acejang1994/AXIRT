@@ -1,6 +1,16 @@
 var issues = require("express").Router();
 var Issue = require("../models/issueModel.js").Issue
 
+issues.get("/", function(req, res){
+	Issue.find(function (err, issue){
+		if (err){
+			console.log("error", err);
+			return;
+		}
+		res.json(issue);
+	})
+})
+
 issues.post("/", function(req, res){
     var newIssue = new Issue({
     	  content : req.body.issue
