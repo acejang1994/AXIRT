@@ -24,7 +24,8 @@
     "mongoose": "^4.1.7",
     "morgan": "^1.6.0",
     "multer": "^1.0.6",
-    "multiparty": "^4.1.2"
+    "multiparty": "^4.1.2",
+    "angular-material":"1.1.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",

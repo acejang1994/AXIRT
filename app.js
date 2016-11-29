@@ -2,15 +2,11 @@
 var express = require("express");
 var path = require("path");
 var logger = require("morgan");
-var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-// var passport = require('passport');
-var session = require('express-session');
 
 // custom modules
 var dbConfig = require('./database/db.js');
-// var auth = require('./auth.js');
 
 // setup things
 mongoose.connect(dbConfig.url);
@@ -19,18 +15,10 @@ mongoose.connect(dbConfig.url);
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// app.use(session({
-// 	secret: auth.secret,
-// 	name: 'AXIRTCookie',
-// 	resave: false,
-// 	saveUninitialized: false
-// }));
-
 //Middleware
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // this sets up all of the routes

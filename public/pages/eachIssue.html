@@ -1,0 +1,6 @@
+<ul class="issue" layout="column">
+	{{quest.content}} 
+	<li ng-repeat="comment in quest.comment">
+		{{comment.content}} : {{comment.authorId}}
+	</li>
+</ul>

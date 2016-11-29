@@ -1,1 +1,18 @@
+html, body {
+  height: 100%; /*Fixes the height to 100% of the viewport*/
+}
 
+.issuesList li {
+	padding: 10px;
+}
+
+ul.issue {
+	padding: 10px;
+	border-bottom: 1px dotted;
+	font-size: 24px;
+}
+
+ul li {
+	overflow: hidden;
+	font-size: 18px;
+}
