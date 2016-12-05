@@ -3,13 +3,16 @@
 	    <form name="myForm" flex="100">
     	<md-input-container class="in">
     		<label>Response</label>
-			<textarea cols="100" rows="5" md-no-autogrow="true" class="feedbackInput"></textarea>
+			<textarea cols="100" rows="5" md-no-autogrow="true" class="feedbackInput" ng-model="vm.issueContent"></textarea>
 			<!-- <input type="submit" value="Submit"/> -->
     	</md-input-container>
 		</form>
-		<md-button class="md-raised md-primary" ng-click="submitAnswers()">Submit</md-button>
+		<md-button class="md-raised md-primary" ng-click="vm.postIssue()">Submit</md-button>
 
 	<ul class="issuesList" ng-repeat="issue in vm.issues">
-		<issue quest="issue"></issue>
+		<ul class="issue" layout="column">
+			<a ng-href="/yo" ng-click="vm.logshit()"> {{issue.content}} </a>
+			 by {{issue.authorId}} posted on {{vm.convertDate(issue.timestamp)}}
+		</ul>
 	</ul>
 </div>

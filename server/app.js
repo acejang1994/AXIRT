@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var dbConfig = require('./database/db.js');
 
 // setup things
+mongoose.Promise = global.Promise; // using promise they are cool
 mongoose.connect(dbConfig.url);
 
 // Initialize express app

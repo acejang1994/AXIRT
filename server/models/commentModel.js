@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var commentSchema = mongoose.Schema({
-	  authorId : String
-	, content : String
-	, dateCreated : Number
-	, upvote : Number
+	authorId : String,
+	content : String,
+	upvote : Number,
+    timestamp: { type: Date, default: Date.now },
 });
 
 // expose the model for users

@@ -1,6 +1,15 @@
 <ul class="issue" layout="column">
-	{{quest.content}} 
+	{{quest.content}} by {{quest.authorId}} posted on {{quest.timestamp}}
+
 	<li ng-repeat="comment in quest.comment">
-		{{comment.content}} : {{comment.authorId}}
+		{{comment.content}} by {{comment.authorId}} posted at {{vm.convertDate(comment.timestamp)}}
 	</li>
+	<form name="replyCommentForm" flex="100">
+    	<md-input-container class="in">
+    		<label>Response</label>
+			<textarea cols="100" rows="5" md-no-autogrow="true" class="commentInput" ng-model="vm.commentContent"></textarea>
+			<!-- <input type="submit" value="Submit"/> -->
+    	</md-input-container>
+		</form>
+		<md-button class="md-raised md-primary" ng-click="vm.postComment()">Submit</md-button>
 </ul>

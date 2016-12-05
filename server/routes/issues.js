@@ -2,30 +2,31 @@ var issues = require("express").Router();
 var Issue = require("../models/issueModel.js").Issue
 
 issues.get("/", function(req, res){
-	Issue.find(function (err, issue){
-		if (err){
-			console.log("error", err);
-			return;
-		}
-		res.json(issue);
-	})
+    var query = Issue.find().exec();
+
+	query.then(function(issues){
+        res.json(issues);
+    })
+    .catch(function(err) {
+        console.log("error", err);
+        res.sendStatus(500);
+    });
 })
 
 issues.post("/", function(req, res){
     var newIssue = new Issue({
-    	  content : req.body.issue
-    	, authorId : req.body.authorId
-    	, dateCreated : new Date().getTime()
-    	, upvote : 0
-	});
+    	content : req.body.issue,
+    	authorId : req.body.authorId,
+    	upvote : 0,
+    });
 
-	newIssue.save(function(err, issue){
-		if (err){
-			console.log("error", err);
-			return;
-		}
-		res.json(issue);
-	});
+    newIssue.save().then(function(issue) {
+        res.json(issue);
+    })
+    .catch(function(err) {
+        console.log("error", err);
+        res.sendStatus(500);
+    });
 });
 
 issues.post("/comment", function(req, res){
@@ -36,23 +37,22 @@ issues.post("/comment", function(req, res){
 	var update = {
 		"$push" : { 
 			"comment" : { 
-				  "authorId": authorId
-				  , "content" : comment
-				  , "dateCreated" : new Date().getTime()
-				  , "upvote" : 0
+				"authorId": authorId,
+				"content" : comment,
+				"upvote" : 0
 			}
 		}
 	}
 
-	Issue.findOneAndUpdate({
-		"_id" : issueId 
-	}, update, {"new": true }, function(err, data){
-		if (err) {
-			console.log("error", err);
-			return;
-		}
-		res.json(data);
-	});
+	var query = Issue.findOneAndUpdate({ "_id" : issueId }, update, {"new": true }).exec();
+
+	query.then(function(issue){
+		res.json(issue);
+	})
+	.catch(function(err){
+		console.log("error", err);
+		res.sendStatus(500);
+	})
 });
 
 issues.post("/upvote", function(req, res){

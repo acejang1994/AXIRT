@@ -1,11 +1,11 @@
 (function(){
   //initialize the angular app and inject dependencies.
-  angular.module("axirt.issuecontroller", ['ngRoute'])
+  angular.module("axirt.issue", ['ngRoute'])
     .config(function($routeProvider, $locationProvider) {
       $routeProvider
-        .when('/issue', {
-          templateUrl: './pages/issue.html',
-          controller: 'IssueController',
+        .when('/yo', {
+          templateUrl: './pages/eachIssue.html',
+          controller: 'Controller',
           controllerAs: 'vm'
         })
       $locationProvider.html5Mode({
@@ -13,34 +13,22 @@
         requireBase: false
       });
     })
-    .controller('IssueController', IssueController);
+    .controller('Controller', Controller);
 
-  function IssueController($http, $window) {
+  function Controller($http) {
     var vm = this;
+    vm.issue = {};
+
     // vm.service = issueservice;
+    // console.log(issueservice.getIssue());
 
-    vm.logshit = function() {
-      console.log("yo");
-    }
-
-    vm.loadIssues = function() {
-      $http.get('/issues').then(
-        function success(response) {
-          console.log(response)
-          vm.issues = response.data;
-        }, function error(response) {
-          console.log(response);
-        }
-      );
-    }
-
-    vm.postIssue = function() {
-      console.log(vm.issueContent);
+    vm.postComment = function() {
       var newIssue = {
-        issue : vm.issueContent,
+        comment : vm.commentContent,
         authorId : "id",
+        issueId : vm.issueId
       }
-      $http.post('/issues', newIssue).then(
+      $http.post('/issues/comment', newIssue).then(
         function success(response){
           console.log(response);
           $window.location.reload();
@@ -58,7 +46,5 @@
       };
       return d.toLocaleDateString("en-US", options)
     }
-
-    vm.loadIssues();
   }
 })();

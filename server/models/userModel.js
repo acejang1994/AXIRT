@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-	  oauthId : String
-	, username : String
-	, dateCreated : Number
-	
+	oauthId : String, 
+	username : String, 
+    timestamp: { type: Date, default: Date.now },
 });
 
 // expose the model for users

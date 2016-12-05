@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
-var Comment = require('./commentModel.js').CommentSchema;
+var CommentSchema = require('./commentModel.js').CommentSchema;
 
 var issueSchema = mongoose.Schema({
-	  content : String
-	, comment : [Comment]
-	, authorId : String // string ID
-	, dateCreated : Number
-	, upvote : Number
-	, dateLastEdited : Number
+	content : String,
+	comment : { type: [CommentSchema], default: [] },
+	authorId : String, // string ID
+    timestamp: { type: Date, default: Date.now },
+	upvote : Number,
+	dateLastEdited : { type: Date, default: Date.now },
 });
 
 // expose the model for users
