@@ -13,6 +13,19 @@ issues.get("/", function(req, res){
     });
 })
 
+issues.post("/id", function(req, res){
+	var id = req.body.id
+    var query = Issue.findOne({"_id": id }).exec();
+
+	query.then(function(issues){
+        res.json(issues);
+    })
+    .catch(function(err) {
+        console.log("error", err);
+        res.sendStatus(500);
+    });
+})
+
 issues.post("/", function(req, res){
     var newIssue = new Issue({
     	content : req.body.issue,

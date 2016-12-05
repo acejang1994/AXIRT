@@ -17,16 +17,10 @@
 
   function IssueController($http, $window) {
     var vm = this;
-    // vm.service = issueservice;
-
-    vm.logshit = function() {
-      console.log("yo");
-    }
 
     vm.loadIssues = function() {
       $http.get('/issues').then(
         function success(response) {
-          console.log(response)
           vm.issues = response.data;
         }, function error(response) {
           console.log(response);

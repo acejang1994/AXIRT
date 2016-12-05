@@ -3,8 +3,8 @@
   angular.module("axirt.issue", ['ngRoute'])
     .config(function($routeProvider, $locationProvider) {
       $routeProvider
-        .when('/yo', {
-          templateUrl: './pages/eachIssue.html',
+        .when('/issue/:id', {
+          templateUrl: '../pages/eachIssue.html',
           controller: 'Controller',
           controllerAs: 'vm'
         })
@@ -15,18 +15,29 @@
     })
     .controller('Controller', Controller);
 
-  function Controller($http) {
+  function Controller($http, $window, $routeParams) {
     var vm = this;
-    vm.issue = {};
+    vm.eachIssue = {};
+    vm.issueId = $routeParams.id;
 
-    // vm.service = issueservice;
-    // console.log(issueservice.getIssue());
+    vm.getIssue = function() {
+
+      $http.post('/issues/id', {"id": vm.issueId } ).then(
+        function success(response){
+          console.log(response);
+          vm.eachIssue = response.data;
+
+        }, function error(response){
+          console.log(response)
+        });
+    }
+    vm.getIssue();
 
     vm.postComment = function() {
       var newIssue = {
         comment : vm.commentContent,
         authorId : "id",
-        issueId : vm.issueId
+        issueId : vm.eachIssue._id
       }
       $http.post('/issues/comment', newIssue).then(
         function success(response){
@@ -46,5 +57,6 @@
       };
       return d.toLocaleDateString("en-US", options)
     }
+    
   }
 })();

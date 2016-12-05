@@ -11,7 +11,7 @@
 
 	<ul class="issuesList" ng-repeat="issue in vm.issues">
 		<ul class="issue" layout="column">
-			<a ng-href="/yo" ng-click="vm.logshit()"> {{issue.content}} </a>
+			<a ng-href="/issue/{{issue._id}}"> {{issue.content}} </a>
 			 by {{issue.authorId}} posted on {{vm.convertDate(issue.timestamp)}}
 		</ul>
 	</ul>

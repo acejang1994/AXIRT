@@ -2,7 +2,6 @@
 	//initialize the angular app and inject dependencies.
 	var axirt = angular.module("axirt", [
     'ngRoute',
-    // 'axirt.service',
     'axirt.issuecontroller',
     'axirt.issue',
     'ngMaterial',
